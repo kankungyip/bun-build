@@ -1,0 +1,11 @@
+{
+  "name": "bun-build",
+  "bin": "bin.js",
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^11.1.1"
+  }
+}
