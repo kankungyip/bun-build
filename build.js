@@ -9,14 +9,13 @@ const CONFIG_FILE = resolve(CWD, 'build.config');
 
 export default async function build({ watch: watchDir } = {}) {
   if (watchDir) {
-    let rebuildTimer = null;
-    const rebuild = () => {
-      rebuildTimer && clearTimeout(rebuildTimer);
-      rebuildTimer = setTimeout(() => {
-        console.log(`\n---[${new Date()}]---------`);
-        rebuildTimer = null;
-        build();
-      }, 1000);
+    build.isBuilding = true;
+    const rebuild = async () => {
+      if (build.isBuilding) return;
+      build.isBuilding = true;
+      console.log(`\n---[${new Date()}]---------`);
+      await build();
+      build.isBuilding = false;
     };
     watch(resolve(CWD, watchDir), { recursive: true }, rebuild);
   }
